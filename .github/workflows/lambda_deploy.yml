@@ -26,6 +26,6 @@ jobs:
       - name: deploy
         run: |
           zip -r deploy.zip . -x .env .github .git
-          aws lambda update-function-code --function-name=function-name --zip-file=fileb://deploy.zip
-        with:
-          function-name: ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
+          aws lambda update-function-code --function-name=$FUNCTION_NAME --zip-file=fileb://deploy.zip
+        env:
+          FUNCTION_NAME: ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
